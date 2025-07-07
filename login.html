@@ -5,22 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poll App | Đăng nhập</title>
     <link rel="stylesheet" href="./assets/css/login.css">
+    <link rel="stylesheet" href="./assets/css/common.css">
 </head>
 <body>
-    <div class="login">
+    <div class="main">
     <h1>Đăng nhập</h1>
-    <div class="selectuser">
-     <select id="user">
-         <option value="" disabled selected>Chọn user</option>
-         <option value="huy">Huy</option>
-         <option value="thinh">Thinh</option>
-         <option value="quynh">Quynh</option>
-     </select>
-     <br><br>
-     <button id="loginbutton">Select</button>
+    <div class="login">
+        <form action="" method="post">
+            <select id="user">
+                <option value="selectuser">Chọn user</option>
+                <option value="huy">Huy (admin)</option>
+                <option value="thinh">Thinh</option>
+                <option value="quynh">Quynh</option>
+            </select>
+            <br>
+            <button type="submit" id="loginbutton">Select</button>
+        </form>
     </div>
     </div> 
 
     <script src="./assets/js/login.js"></script>
+    <script src="./assets/js/common.js"></script>
+
 </body>
 </html>

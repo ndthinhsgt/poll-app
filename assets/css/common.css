@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+    background-color: ghostwhite;
+}
+
+.main h1 {
+    padding: 10px 15px;
+}
+
+button {
+    margin: 10px;
+    padding: 5px 15px;
+    background-color: blue;
+    color: white;
+    border: 2px solid blue;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;    
+}
+
+button:active {
+    opacity: 0.6;
+}
