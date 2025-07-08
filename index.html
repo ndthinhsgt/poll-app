@@ -7,16 +7,31 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <div class="vote">
-     <h1>Votes</h1>
-     <button id="createvote">Tạo vote</button>
-     <button id="logout">Đăng xuất</button>
-      <div class="main">
-        <h2>Hôm nay ăn gì</h2>
-        
-
-    <script src="./assets/js/script.js"></script>
-     </div>
+    <div class="header">
+        <h1>Votes</h1>
+        <button id="createvote">Tạo vote</button>
+        <button id="logout">Đăng xuất</button>
+    </div>
+    <div class="form">
+        <form action="" method="get" class="form-control">
+            <fieldset>
+                <b>Hôm nay ăn gì</b>
+                <br>
+                <input type="radio" id="rice" name="food" value="rice">
+                <label for="rice">Ăn cơm</label>
+                <br>
+                <input type="radio" id="noodle" name="food" value="noodle">
+                <label id="noodle">Ăn mì</label>
+            </fieldset>   
+        </form>    
+        <div class="user" id="user">Huy</div>
+    </div>
+    <div class="footer">
+        <button id="vote">Tạo vote</button>
+        <button id="detail">Detail</button>
+    </div>
+        <script src="./assets/js/script.js"></script>
+     
     </div>
 </body>
 </html>
