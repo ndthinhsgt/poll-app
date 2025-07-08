@@ -1,25 +1,24 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url(reset.css);
 
-.main {
-    width: 100%;
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+    width: 100vw;
     height: 100vh;
     background-color: ghostwhite;
 }
 
-.main h1 {
-    padding: 10px 15px;
+h1 {
+    padding: 15px;
+    font-size: 32px;
 }
 
 button {
-    margin: 10px;
-    padding: 5px 15px;
+    margin: auto;
+    padding: 7px 15px;
     background-color: blue;
     color: white;
-    border: 2px solid blue;
+    border: none;
     border-radius: 5px;
     display: inline-block;
     cursor: pointer;
