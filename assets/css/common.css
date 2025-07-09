@@ -1,0 +1,33 @@
+@import url(reset.css);
+
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+    width: 100vw;
+    height: 100vh;
+    background-color: ghostwhite;
+}
+
+h1 {
+    padding: 15px;
+    font-size: 32px;
+}
+
+button {
+    margin: auto;
+    padding: 7px 15px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;    
+}
+
+button:active {
+    opacity: 0.6;
+}
