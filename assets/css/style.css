@@ -1,0 +1,28 @@
+body {
+    display: grid;
+    grid-template-areas: "header" "form" "footer";
+}
+.header {
+    display: grid;
+}
+
+.header > h1 {
+    justify-content: flex-start;
+}
+
+.header >  button {
+    justify-content: end;
+    margin: 5px;
+}
+
+.form {
+    display: grid;
+}
+
+.form-control {
+    justify-content: start;
+}
+
+.user {
+    justify-content: end;
+}
