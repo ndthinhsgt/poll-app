@@ -1,28 +1,43 @@
 body {
-    display: grid;
-    grid-template-areas: "header" "form" "footer";
-}
-.header {
-    display: grid;
-}
-
-.header > h1 {
-    justify-content: flex-start;
-}
-
-.header >  button {
-    justify-content: end;
     margin: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
-.form {
-    display: grid;
+fieldset {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px 0px;
+    background-color: white;
 }
 
-.form-control {
-    justify-content: start;
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+b {
+    font-weight: 800;
 }
 
 .user {
-    justify-content: end;
+    background-color: ghostwhite;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 7px 15px;
+}
+
+.form-content {
+    padding: 10px 2px;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
 }

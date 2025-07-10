@@ -6,15 +6,14 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: ghostwhite;
+    padding: 10px;
 }
 
 h1 {
-    padding: 15px;
     font-size: 32px;
 }
 
 button {
-    margin: auto;
     padding: 7px 15px;
     background-color: #2563eb;
     color: white;
