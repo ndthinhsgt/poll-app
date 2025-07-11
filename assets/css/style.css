@@ -4,6 +4,11 @@ body {
     flex-direction: column;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
 fieldset {
     border: 1px solid;
     border-radius: 5px;
@@ -12,12 +17,7 @@ fieldset {
     background-color: white;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form-top {
+fieldset > .form-top {
     display: flex;
     justify-content: space-between;
 }
@@ -26,18 +26,18 @@ b {
     font-weight: 800;
 }
 
-.user {
+fieldset > .form-top > .user {
     background-color: ghostwhite;
     border: 1px solid gray;
     border-radius: 5px;
     padding: 7px 15px;
 }
 
-.form-content {
+fieldset > .form-center {
     padding: 10px 2px;
 }
 
-.form-footer {
+fieldset > .form-bottom {
     display: flex;
     justify-content: space-between;
 }
