@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poll App | Votes</title>
     <link rel="stylesheet" href="./assets/css/common.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/list.css">
 </head>
 <body>    
-    <div class="header">
+    <div class="body-top">
         <h1>Votes</h1>
-        <div class="header-right">
+        <div class="top-button">
             <button id="createvote">Tạo vote</button>
             <button id="logout">Đăng xuất</button>
         </div>
@@ -23,11 +23,14 @@
             </div>
                 
             <div class="form-center">
-                <input type="radio" id="rice" name="food" value="rice">
-                <label for="rice">Ăn cơm</label>
-                <br>
-                <input type="radio" id="noodle" name="food" value="noodle">
+                <div class="form-center--answer">
+                    <input type="radio" id="rice" name="food" value="rice">
+                    <label for="rice">Ăn cơm</label>
+                </div>
+                    <div class="form-center--answer">
+                    <input type="radio" id="noodle" name="food" value="noodle">
                 <label for="noodle">Ăn mì</label>
+                </div>
             </div>
             
             <div class="form-bottom">
@@ -38,7 +41,7 @@
     </form>    
 
     <script src="./assets/js/common.js"></script>
-    <script src="./assets/js/script.js"></script>     
+    <script src="./assets/js/list.js"></script>     
     
 </body>
 </html>

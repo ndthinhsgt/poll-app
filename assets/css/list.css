@@ -4,9 +4,10 @@ body {
     flex-direction: column;
 }
 
-.header {
+.body-top {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 25px;
 }
 
 fieldset {
@@ -37,7 +38,12 @@ fieldset > .form-center {
     padding: 10px 2px;
 }
 
+fieldset > .form-center > .form-center--answer {
+    margin-bottom: 10px;
+}
+
 fieldset > .form-bottom {
     display: flex;
     justify-content: space-between;
+    padding-top: 5px;
 }
