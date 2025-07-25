@@ -1,5 +1,4 @@
 body {
-    margin: 5px;
     display: flex;
     flex-direction: column;
 }
@@ -8,6 +7,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 25px;
 }
 
 form {
@@ -16,14 +16,16 @@ form {
 }
 
 form label {
-    margin: 10px 0px 5px 0px;
+    margin: 7px 0px 5px 0px;
 }
 
 form input {
     width: 500px;
-    height: 30px;
+    height: 17px;
     margin-bottom: 15px;
     border-radius: 5px;
+    padding: 7px;
+    border: 1px solid #dcdcdc;
 }
 
 form button {
