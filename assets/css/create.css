@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.body-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 7px 0px 5px 0px;
+}
+
+form input {
+    width: 500px;
+    height: 17px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    padding: 7px;
+    border: 1px solid #dcdcdc;
+}
+
+form button {
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+#createVote:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
