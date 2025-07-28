@@ -1,0 +1,49 @@
+body {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.body-top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 25px;
+}
+
+fieldset {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px 0px;
+    background-color: white;
+}
+
+fieldset > .form-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+b {
+    font-weight: 800;
+}
+
+fieldset > .form-top > .user {
+    background-color: ghostwhite;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 7px 15px;
+}
+
+fieldset > .form-center {
+    padding: 10px 2px;
+}
+
+fieldset > .form-center > .form-center--answer {
+    margin-bottom: 10px;
+}
+
+fieldset > .form-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+}
