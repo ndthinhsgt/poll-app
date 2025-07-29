@@ -4,11 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poll App | Tạo Vote</title>
+    <link rel="stylesheet" href="./assets/css/common.css">
     <link rel="stylesheet" href="./assets/css/create.css">
 </head>
 <body>
-    <h1>Tạo Vote</h1>
+    <div class="body-top">
+        <h1>Tạo Vote</h1>
+        <div class="body-top-right">
+            <button id="createvote">Tạo vote</button>
+            <button id="logout">Đăng xuất</button>
+        </div>
+    </div>
 
+        <form action="" method="post">
+            <label for="title">Tiêu đề</label>
+            <input type="text" name="title" value="">
+            <label for="option">Option</label>
+            <input type="text" id="option" value="" name="option">
+            <button id="addOption">Thêm option</button>
+            <button type="submit" id="createVote" disabled>Tạo vote</button>
+        </form>
+    </div>
+    
+
+    <script src="./assets/js/common.js"></script>
     <script src="./assets/js/create.js"></script>
 </body>
 </html>
