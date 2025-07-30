@@ -5,7 +5,6 @@ const userData = [
 ];
 
 const select = document.querySelector('#user')
-select.length = 1
 
 for (const eachUser of userData) {
   const option = document.createElement("option");
