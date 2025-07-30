@@ -8,7 +8,32 @@
     <link rel="stylesheet" href="./assets/css/detail.css">
 </head>
 <body>
-    <h1>Thông tin Vote</h1>
+    <div class="body-top">
+        <h1>Thông tin Vote</h1>
+        <div>
+            <button id="back">Trở lại</button>
+            <button id="logout">Đăng xuất</button>
+        </div>
+    </div>
+
+    <div class="vote-content">
+        <div>
+            <label>Tiêu đề</label>
+            <br>
+            <input id="vote-title" type="text" value="" readonly>
+        </div>
+ 
+        <div class="vote-option">
+            <div>
+                <label>Option 1</label>
+                <br>
+                <input id="option1" type="text" value="" readonly>
+            </div>
+            <div>
+                <p>0 Votes</p>
+            </div>
+        </div>
+    </div>
 
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/detail.js"></script>
