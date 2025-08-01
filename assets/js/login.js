@@ -17,7 +17,8 @@ for (const eachUser of userData) {
 document.querySelector('#user').addEventListener("change", () => {
   const selectValue = select.value;
   if (selectValue !== '') {
-    submitButton.disabled = false}
+    submitButton.disabled = false
+  }
 });
 
 document.querySelector('form').addEventListener('submit', (reload) => {
@@ -26,5 +27,6 @@ document.querySelector('form').addEventListener('submit', (reload) => {
   if (selectValue !== '') {
     sessionStorage.setItem("loginUser", selectValue)
     alert('Login thành công');
-    window.location.href = 'list.html';}
+    window.location.href = 'list.html'
+  };
 });
