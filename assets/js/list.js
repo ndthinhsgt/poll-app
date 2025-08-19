@@ -1,3 +1,19 @@
 document.querySelector('#detail').addEventListener('click', () => {
   window.location.href = '/detail';
 });
+
+function logOut(){
+  const logSession = JSON.parse(sessionStorage.getItem("loginUser"));
+  if (!logSession){
+    window.location.href = '/login';
+  } else {
+    alert('Bạn có muốn đăng xuất?');
+    sessionStorage.removeItem("loginUser");
+    window.location.href = '/login';
+  }
+};
+document.querySelector('#logout').addEventListener('click', logOut);
+
+document.querySelector('#createvote').addEventListener('click', function (){
+    window.location.href = '/create';
+});
