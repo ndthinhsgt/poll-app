@@ -1,3 +1,6 @@
+document.querySelector('#detail').addEventListener('click', () => {
+  window.location.href = '/detail';
+});
 
 function logOut(){
   const logSession = JSON.parse(sessionStorage.getItem("loginUser"));
@@ -9,10 +12,8 @@ function logOut(){
     window.location.href = '/login';
   }
 };
-
 document.querySelector('#logout').addEventListener('click', logOut);
 
 document.querySelector('#createvote').addEventListener('click', function (){
-    window.location.href = '/create'
+    window.location.href = '/create';
 });
-
