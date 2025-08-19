@@ -1,3 +1,4 @@
+
 function logOut(){
   const logSession = JSON.parse(sessionStorage.getItem("loginUser"));
   if (!logSession){
@@ -10,3 +11,8 @@ function logOut(){
 };
 
 document.querySelector('#logout').addEventListener('click', logOut);
+
+document.querySelector('#createvote').addEventListener('click', function (){
+    window.location.href = '/create'
+});
+
