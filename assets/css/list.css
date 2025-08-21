@@ -47,3 +47,8 @@ fieldset > .form-bottom {
     justify-content: space-between;
     padding-top: 5px;
 }
+
+#vote:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
