@@ -52,3 +52,8 @@ fieldset > .form-bottom {
     opacity: 0.5;
     cursor: default;
 }
+
+input[type="radio"]:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
