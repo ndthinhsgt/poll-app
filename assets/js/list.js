@@ -81,6 +81,11 @@ saveData.forEach((qa, index) => {
     const label = document.createElement("label");
     label.setAttribute("for", input.id);
     label.textContent = option.text;
+
+    input.addEventListener("change", () => {
+      voteBtn.disabled = false;
+    })
+
     newOption.appendChild(eachOption);
     eachOption.appendChild(input);
     eachOption.appendChild(label);
@@ -94,22 +99,6 @@ saveData.forEach((qa, index) => {
   voteBtn.textContent = "Vote";
   voteBtn.type = "button"
   voteBtn.disabled = true;
-  const detailBtn = document.createElement("button");
-  detailBtn.id = `detail_q${index}`;
-  detailBtn.textContent = "Detail";
-  detailBtn.type = "button";
-  formBottom.appendChild(voteBtn);
-  formBottom.appendChild(detailBtn);
-  fieldset.appendChild(formBottom);
-
-  form.appendChild(fieldset);
-
-  input.forEach(input => {
-    input.addEventListener("change", () => {
-      voteBtn.disabled = false;
-    });
-  });
-
   voteBtn.addEventListener("click", () => {
     const ticked = fieldset.querySelector("input[type=radio]:checked");
     if (ticked) {
@@ -136,5 +125,25 @@ saveData.forEach((qa, index) => {
 console.log(saved); 
     }
   })
+
+  const detailBtn = document.createElement("button");
+  detailBtn.id = `detail_q${index}`;
+  detailBtn.textContent = "Detail";
+  detailBtn.type = "button";
+  detailBtn.addEventListener("click", () => {
+    window.location.href = `/detail?id=${question.id}`;
+  });
+
+  formBottom.appendChild(voteBtn);
+  formBottom.appendChild(detailBtn);
+  fieldset.appendChild(formBottom);
+
+  form.appendChild(fieldset);
+
+  input.forEach(input => {
+    input.addEventListener("change", () => {
+      voteBtn.disabled = false;
+    });
+  });
 });
 
