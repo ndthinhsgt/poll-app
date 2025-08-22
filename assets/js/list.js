@@ -40,7 +40,7 @@ const users = {
   '1': 'Huy',
   '2': 'Thinh',
   '3': 'Quynh'
-}
+};
 
 localStorage.setItem("questionAnswer", JSON.stringify(questionAnswer));
 
@@ -104,7 +104,6 @@ saveData.forEach((qa, index) => {
 
 
 
-
 const voteResult = [];
 
 form.querySelectorAll("fieldset").forEach(fieldset => {
@@ -132,7 +131,7 @@ form.querySelectorAll("fieldset").forEach(fieldset => {
       };
       let newOption = newQA.options.find(o => o.index === tickedValue);
       if (!newOption) {
-        newOption = { index: tickedValue, user: [] };
+        newOption = {index: tickedValue, user: []};
         newQA.options.push(newOption);
       };
       newOption.users.push(userId);
