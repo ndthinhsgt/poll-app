@@ -36,13 +36,14 @@ const questionAnswer = [
   }
 ];
 
-const users = {
-  '1': 'Huy',
-  '2': 'Thinh',
-  '3': 'Quynh'
-};
+const users = [
+  { id: 1, name: "Huy (Admin)" },
+  { id: 2, name: "Thinh" },
+  { id: 3, name: "Quynh" }
+];
 
 localStorage.setItem("questionAnswer", JSON.stringify(questionAnswer));
+localStorage.setItem("users", JSON.stringify(users));
 
 function getQA() {
   const getVote = JSON.parse(localStorage.getItem("questionAnswer"));
@@ -51,13 +52,15 @@ function getQA() {
 const saveData = getQA();
 const form = document.querySelector("form");
 
+const voteResult = [];
+
 saveData.forEach((qa, index) => {
   const fieldset = document.createElement("fieldset");
   const newQuestion = document.createElement("div");
   newQuestion.className = "form-top";
   const userInfo = document.createElement("div");
   userInfo.className = "user";
-  userInfo.innerText = users[sessionStorage.getItem('loginUser') ?? '1']
+  userInfo.innerText = users[sessionStorage.getItem('users') ?? '1']
 
   const question = document.createElement("b");
   question.textContent = qa.question;
@@ -100,17 +103,9 @@ saveData.forEach((qa, index) => {
   fieldset.appendChild(formBottom);
 
   form.appendChild(fieldset);
-});
 
-
-
-const voteResult = [];
-
-form.querySelectorAll("fieldset").forEach(fieldset => {
-  const voteBtn = document.getElementById(`vote_q${index}`);
-  const radios = fieldset.querySelectorAll("input[type=radio]");
-  radios.forEach(radio => {
-    radio.addEventListener("change", () => {
+  input.forEach(input => {
+    input.addEventListener("change", () => {
       voteBtn.disabled = false;
     });
   });
@@ -118,7 +113,7 @@ form.querySelectorAll("fieldset").forEach(fieldset => {
   voteBtn.addEventListener("click", () => {
     const ticked = fieldset.querySelector("input[type=radio]:checked");
     if (ticked) {
-      radios.forEach(radio => radio.disabled = true);
+      input.forEach(input => input.disabled = true);
       voteBtn.disabled = true;
       const questionId = fieldset.querySelector("b").id;
       const tickedValue = ticked.value;
@@ -131,13 +126,15 @@ form.querySelectorAll("fieldset").forEach(fieldset => {
       };
       let newOption = newQA.options.find(o => o.index === tickedValue);
       if (!newOption) {
-        newOption = {index: tickedValue, user: []};
+        newOption = {index: tickedValue, users: []};
         newQA.options.push(newOption);
       };
       newOption.users.push(userId);
 
       localStorage.setItem("voteResult", JSON.stringify(voteResult));
+      let saved = JSON.parse(localStorage.getItem("voteResult"));
+console.log(saved); 
     }
   })
-}
-);
+});
+

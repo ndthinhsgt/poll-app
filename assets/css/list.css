@@ -53,7 +53,7 @@ fieldset > .form-bottom {
     cursor: default;
 }
 
-input[type="radio"]:disabled {
+input[type="radio"]:disabled + label{
   opacity: 0.5;
   cursor: default;
 }
