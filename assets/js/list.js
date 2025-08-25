@@ -1,149 +1,153 @@
-document.querySelector('#detail').addEventListener('click', () => {
-  window.location.href = '/detail';
+/**
+ * Logic chính mình viết trong `DOMContentLoaded`
+ * Còn hàm viết bên ngoài
+ */
+
+window.addEventListener("DOMContentLoaded", () => {
+  // logic chính
+  const app = document.getElementById("app");
+  if (!app) return;
+
+  // logout button click
+  document.querySelector("#logout").addEventListener("click", () => {
+    logOut();
+  });
+  // create button click
+  document.querySelector("#createvote").addEventListener("click", function () {
+    toCreate();
+  });
+
+  // Lấy user
+  const user = getUserFromSession();
+
+  // render list vote
+  renderListVote(app, user);
 });
+
+function toDetail(id) {
+  redirect("/detail?id=" + id);
+}
+
+function toCreate() {
+  redirect("/create");
+}
 
 function logOut() {
   const logSession = JSON.parse(sessionStorage.getItem("loginUser"));
   if (!logSession) {
-    window.location.href = '/login';
+    window.location.href = "/login";
   } else {
-    alert('Bạn có muốn đăng xuất?');
+    alert("Bạn có muốn đăng xuất?");
     sessionStorage.removeItem("loginUser");
-    window.location.href = '/login';
+    window.location.href = "/login";
   }
-};
-document.querySelector('#logout').addEventListener('click', logOut);
+}
 
-document.querySelector('#createvote').addEventListener('click', function () {
-  window.location.href = '/create';
-});
+function renderListVote(app, user) {
+  // lấy list votes
+  const votes = getVotes();
 
-
-const questionAnswer = [
-  {
-    question: "Hôm nay ăn gì?",
-    options: [
-      { index: 0, text: "Ăn mì" },
-      { index: 1, text: "Ăn cơm" }
-    ]
-  },
-  {
-    question: "Ngày mai uống gì?",
-    options: [
-      { index: 0, text: "Trà sữa" },
-      { index: 1, text: "Cà phê" }
-    ]
+  // render list votes: chạy vòng for
+  for (let voteIndex in votes) {
+    // render vote
+    const vote = votes[voteIndex];
+    const voteElement = createVoteElement(vote, voteIndex, user);
+    app.appendChild(voteElement);
   }
-];
+}
 
-const users = [
-  { id: 1, name: "Huy (Admin)" },
-  { id: 2, name: "Thinh" },
-  { id: 3, name: "Quynh" }
-];
-
-localStorage.setItem("questionAnswer", JSON.stringify(questionAnswer));
-localStorage.setItem("users", JSON.stringify(users));
-
-function getQA() {
-  const getVote = JSON.parse(localStorage.getItem("questionAnswer"));
-  return getVote;
-};
-const saveData = getQA();
-const form = document.querySelector("form");
-
-const voteResult = [];
-
-saveData.forEach((qa, index) => {
-  const fieldset = document.createElement("fieldset");
-  const newQuestion = document.createElement("div");
-  newQuestion.className = "form-top";
-  const userInfo = document.createElement("div");
-  userInfo.className = "user";
-  userInfo.innerText = users[sessionStorage.getItem('users') ?? '1']
-
-  const question = document.createElement("b");
-  question.textContent = qa.question;
-  question.id = `q${index}`;
-  newQuestion.appendChild(question);
-  newQuestion.appendChild(userInfo)
-  fieldset.appendChild(newQuestion);
-  const newOption = document.createElement("div");
-  newOption.className = "form-center";
-  qa.options.forEach((option, oIndex) => {
-    const eachOption = document.createElement("div");
-    eachOption.className = "form-center--answer";
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = question.id;
-    input.value = option.index;
-    input.id = question.id + input.value;
-    const label = document.createElement("label");
-    label.setAttribute("for", input.id);
-    label.textContent = option.text;
-
-    input.addEventListener("change", () => {
-      voteBtn.disabled = false;
-    })
-
-    newOption.appendChild(eachOption);
-    eachOption.appendChild(input);
-    eachOption.appendChild(label);
-    fieldset.appendChild(newOption);
+function checkVoted(index, userId) {
+  const result = getVotingResult();
+  // kiểm tra xem index, optionIndex, userId, có trong resutl chứa
+  let option = [];
+  Object.keys(result?.[index])?.map((key) => {
+    option = [...option, result?.[index]?.[key]];
   });
 
-  const formBottom = document.createElement("div");
-  formBottom.className = "form-bottom"
-  const voteBtn = document.createElement("button");
-  voteBtn.id = `vote_q${index}`;
-  voteBtn.textContent = "Vote";
-  voteBtn.type = "button"
-  voteBtn.disabled = true;
-  voteBtn.addEventListener("click", () => {
-    const ticked = fieldset.querySelector("input[type=radio]:checked");
-    if (ticked) {
-      input.forEach(input => input.disabled = true);
-      voteBtn.disabled = true;
-      const questionId = fieldset.querySelector("b").id;
-      const tickedValue = ticked.value;
-      const userId = sessionStorage.getItem('loginUser')
+  // TODO: kiểm tra user id có trong option
+  const check = true;
+  return check;
+}
 
-      let newQA = voteResult.find(q => q.questionId === questionId);
-      if (!newQA) {
-        newQA = { questionId: questionId, options: [] };
-        voteResult.push(newQA);
-      };
-      let newOption = newQA.options.find(o => o.index === tickedValue);
-      if (!newOption) {
-        newOption = {index: tickedValue, users: []};
-        newQA.options.push(newOption);
-      };
-      newOption.users.push(userId);
+function handleChange(index, optionIndex, userId) {
+  const result = getVotingResult();
+  // kiểm tra xem index, optionIndex, userId, có trong resutl chứa
+  const check = checkVoted(index, optionIndex, userId); // TODO: kiểm tra user id có trong option
 
-      localStorage.setItem("voteResult", JSON.stringify(voteResult));
-      let saved = JSON.parse(localStorage.getItem("voteResult"));
-console.log(saved); 
+  // nếu có rồi thì không làm gì
+  if (check) {
+    return;
+  }
+
+  const voteButton = document.getElementById(`vote-${index}-button`);
+  voteButton.disabled = false;
+  voteButton.addEventListener("click", () => {
+    voteButton.disabled = true;
+    // Update result
+    // result[index][optionIndex]push(userId); //
+    /**
+     * nếu '.' mà không tồn tại sẽ bị lỗi
+     */
+    let voteItem = result?.[index]; // object
+    if (voteItem) {
+      // nếu có lưu vote rồi => không xử lý
+    } else {
+      // nếu không có, chưa lưu
+      voteItem = {};
     }
-  })
 
-  const detailBtn = document.createElement("button");
-  detailBtn.id = `detail_q${index}`;
-  detailBtn.textContent = "Detail";
-  detailBtn.type = "button";
-  detailBtn.addEventListener("click", () => {
-    window.location.href = `/detail?id=${question.id}`;
+    let voteItemOption = voteItem?.[optionIndex]; // array
+    if (voteItemOption) {
+      // nếu có lưu vote option rồi không xử lý
+    } else {
+      // nếu không có, chưa lưu
+      voteItemOption = [];
+    }
+
+    voteItemOption.push(userId);
+
+    // Save voting result
+    saveVotingResult(result);
+    alert("XONG");
   });
+}
 
-  formBottom.appendChild(voteBtn);
-  formBottom.appendChild(detailBtn);
-  fieldset.appendChild(formBottom);
+function createVoteElement(vote, index, user) {
+  const id = `vote-${index}`;
 
-  form.appendChild(fieldset);
+  const element = document.createElement("div");
+  const options = vote.options
+    .map((option, optionIndex) => {
+      const optionId = `option-${index}-${optionIndex}`;
+      const voted = checkVoted(index, optionIndex, user?.id);
+      return `
+      <div>
+      <input 
+        type="radio" 
+        name="${id}" 
+        id="${optionId}" 
+        onchange="handleChange('${index}', '${optionIndex}', '${user.id}')"
+        ${voted ? "disabled" : ""}
+        />
+      <label for"#${optionId}">${option.text}</label>
+      </div>
+    `;
+    })
+    .join(" ");
 
-  input.forEach(input => {
-    input.addEventListener("change", () => {
-      voteBtn.disabled = false;
-    });
-  });
-});
+  element.innerHTML = `
+  <div>
+  <div><b>${vote.question}</b> <span>${user?.name}</span></div>
+  ${options}
 
+  <button id="${id}-button" disabled>Vote</button>
+  ${
+    user?.id == 1
+      ? `<button onclick="toDetail('${index}')">Detail</button>`
+      : ""
+  }
+  </div>
+  `;
+
+  return element;
+}
