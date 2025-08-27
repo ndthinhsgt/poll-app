@@ -10,6 +10,11 @@ function getVotes() {
   // const votes = JSON.parse(localStorage.getItem("votes"));
   // Nếu có votes thì return vote
   // Nếu votes không có dữ liệu (null) thì khởi tạo (lưu initVotes vào localStorage)
+
+  const votes = JSON.parse(localStorage.getItem("votes"));
+  if(votes) return votes;
+  //end
+
   const initVotes = [
     {
       question: "Hôm nay ăn gì?",
@@ -32,9 +37,11 @@ function getVotes() {
   return initVotes;
 }
 
+// change
 function saveVotes(votes) {
-  localStorage.setItem("votes", votes);
+  localStorage.setItem("votes", JSON.stringify(votes));
 }
+//end
 
 function getVotingResult() {
   try {
@@ -44,9 +51,11 @@ function getVotingResult() {
   }
 }
 
+//change
 function saveVotingResult(votes) {
-  localStorage.setItem("votes", votes);
+  localStorage.setItem("voteResult", JSON.stringify(votes));
 }
+//end
 
 function getUserFromSession() {
   // Lấy user từ session
@@ -65,5 +74,7 @@ function getUserFromSession() {
   };
 
   // TODO
-  return { id: 1, name: "Mockup" };
+  const user = JSON.parse(userId); 
+  return { id: Number(user.id), name: user.name};
 }
+//end

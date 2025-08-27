@@ -65,14 +65,29 @@ function checkVoted(index, userId) {
   });
 
   // TODO: kiểm tra user id có trong option
-  const check = true;
+  const check = option.includes(userId);
+
+  if (!check) {
+    if (!result[index][optionIndex]) result[index][optionIndex] = [];
+    result[index][optionIndex].push(userId);
+    saveVotingResult(result);
+  }
+  
+  // end
+
   return check;
 }
 
 function handleChange(index, optionIndex, userId) {
   const result = getVotingResult();
   // kiểm tra xem index, optionIndex, userId, có trong resutl chứa
-  const check = checkVoted(index, optionIndex, userId); // TODO: kiểm tra user id có trong option
+  const check = checkVoted(index, optionIndex, userId); 
+  
+  // TODO: kiểm tra user id có trong option
+  if (!result[index][optionIndex].includes(userId)) {
+  result[index][optionIndex].push(userId);
+};
+// end
 
   // nếu có rồi thì không làm gì
   if (check) {
@@ -115,7 +130,19 @@ function handleChange(index, optionIndex, userId) {
 function createVoteElement(vote, index, user) {
   const id = `vote-${index}`;
 
-  const element = document.createElement("div");
+  // change
+  const element = document.createElement("fieldset");
+
+  const formTop = document.createElement("div");
+  formTop.className = "form-top";
+  const newQuestion = document.createElement("b");
+  newQuestion.textContent = vote.question;
+  newQuestion.id = `q${index}`;
+  formTop.appendChild(newQuestion);
+
+  const formCenter = document.createElement("div");
+  formCenter.className = "form-center";
+
   const options = vote.options
     .map((option, optionIndex) => {
       const optionId = `option-${index}-${optionIndex}`;
@@ -129,25 +156,30 @@ function createVoteElement(vote, index, user) {
         onchange="handleChange('${index}', '${optionIndex}', '${user.id}')"
         ${voted ? "disabled" : ""}
         />
-      <label for"#${optionId}">${option.text}</label>
+      <label for="${optionId}">${option.text}</label>
       </div>
     `;
     })
     .join(" ");
 
-  element.innerHTML = `
-  <div>
-  <div><b>${vote.question}</b> <span>${user?.name}</span></div>
-  ${options}
+  formCenter.innerHTML = options;
+  formCenter.innerHTML = options;
 
-  <button id="${id}-button" disabled>Vote</button>
-  ${
-    user?.id == 1
-      ? `<button onclick="toDetail('${index}')">Detail</button>`
-      : ""
-  }
-  </div>
+  const formBottom = document.createElement("div");
+  formBottom.className = "form-bottom";
+  formBottom.innerHTML = `
+    <button id="${id}-button" disabled>Vote</button>
+    ${
+      user?.id == 1
+        ? `<button onclick="toDetail('${index}')">Detail</button>`
+        : ""
+    }
   `;
 
+  element.appendChild(formTop);
+  element.appendChild(formCenter);
+  element.appendChild(formBottom);
+
   return element;
-}
+};
+//end
