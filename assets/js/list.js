@@ -56,7 +56,7 @@ function renderListVote(app, user) {
   }
 }
 
-function checkVoted(index, userId) {
+function checkVoted(index, optionIndex, userId) {
   const result = getVotingResult();
   // kiểm tra xem index, optionIndex, userId, có trong resutl chứa
   let option = [];
@@ -64,22 +64,15 @@ function checkVoted(index, userId) {
     option = [...option, result?.[index]?.[key]];
   });
 
-  const check = option.includes(userId);
-
   // TODO: kiểm tra user id có trong option
 
-  if (!check) {
-    if (!result[index]) result[index] = {};
-    if (!result[index][optionIndex]) result[index][optionIndex] = [];
-    result[index][optionIndex].push(userId);
+  if (!result) return false;
+  if (!result[index]) return false;
+  if (!result[index][optionIndex]) return false;
 
-    saveVotingResult(result);
+  return result[index][optionIndex].includes(userId);
   };
-  
-  // end
-
-  return check;
-}
+// end
 
 function handleChange(index, optionIndex, userId) {
   const result = getVotingResult();
@@ -87,15 +80,15 @@ function handleChange(index, optionIndex, userId) {
   const check = checkVoted(index, optionIndex, userId); 
   
   // TODO: kiểm tra user id có trong option
-  if (!result[index][optionIndex].includes(userId)) {
-  result[index][optionIndex].push(userId);
-};
+  if (!result) return;
+  if (!result[index]) return;
+  if (!result[index][optionIndex]) return;
 // end
 
   // nếu có rồi thì không làm gì
   if (check) {
     return;
-  }
+  };
 
   const voteButton = document.getElementById(`vote-${index}-button`);
   voteButton.disabled = false;
