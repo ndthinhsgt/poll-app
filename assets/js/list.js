@@ -64,14 +64,17 @@ function checkVoted(index, userId) {
     option = [...option, result?.[index]?.[key]];
   });
 
-  // TODO: kiểm tra user id có trong option
   const check = option.includes(userId);
 
+  // TODO: kiểm tra user id có trong option
+
   if (!check) {
+    if (!result[index]) result[index] = {};
     if (!result[index][optionIndex]) result[index][optionIndex] = [];
     result[index][optionIndex].push(userId);
+
     saveVotingResult(result);
-  }
+  };
   
   // end
 
@@ -162,7 +165,6 @@ function createVoteElement(vote, index, user) {
     })
     .join(" ");
 
-  formCenter.innerHTML = options;
   formCenter.innerHTML = options;
 
   const formBottom = document.createElement("div");
