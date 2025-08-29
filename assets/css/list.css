@@ -47,3 +47,13 @@ fieldset > .form-bottom {
     justify-content: space-between;
     padding-top: 5px;
 }
+
+.vote:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+input[type="radio"]:disabled + label{
+  opacity: 0.5;
+  cursor: default;
+}
