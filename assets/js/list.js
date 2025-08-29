@@ -65,12 +65,14 @@ function checkVoted(index, optionIndex, userId) {
   });
 
   // TODO: kiểm tra user id có trong option
-
+  console.log('checkVoted',index, optionIndex, userId, '1')
   if (!result) return false;
+  console.log('checkVoted',index, optionIndex, userId, '2')
   if (!result[index]) return false;
+  console.log('checkVoted',index, optionIndex, userId, '3')
   if (!result[index][optionIndex]) return false;
-
-  return result[index][optionIndex].includes(String(userId));
+console.log('checkVoted',index, optionIndex, userId, '4')
+  return result[index][optionIndex].includes(userId);
   };
 // end
 
@@ -119,8 +121,8 @@ function handleChange(index, optionIndex, userId) {
       voteItemOption = [];
     }
 
-    voteItemOption.push(String(userId));
-    result={...result??{},[index]:{...result?.[index]??{},optionIndex:voteItemOption}}
+    voteItemOption.push(userId);
+    result={...result??{},[index]:{...result?.[index]??{},[optionIndex]:voteItemOption}}
 
     // Save voting result
     console.log(result)
@@ -151,11 +153,15 @@ function createVoteElement(vote, index, user) {
   const formCenter = document.createElement("div");
   formCenter.className = "form-center";
 
+  const voted = vote.options
+    .find((option, optionIndex) => {
+      const optionId = `option-${index}-${optionIndex}`;
+      return checkVoted(index, optionIndex, user?.id);
+    })
+ 
   const options = vote.options
     .map((option, optionIndex) => {
       const optionId = `option-${index}-${optionIndex}`;
-      const voted = checkVoted(index, optionIndex, user?.id);
-      console.log(voted,index, optionIndex, user)
       return `
       <div class="form-center--answer">
       <input 
@@ -176,7 +182,7 @@ function createVoteElement(vote, index, user) {
   const formBottom = document.createElement("div");
   formBottom.className = "form-bottom";
   formBottom.innerHTML = `
-    <button id="${id}-button" disabled>Vote</button>
+    <button id="${id}-button" disabled>Vote${voted ?'d':''}</button>
     ${
       user?.id == 1
         ? `<button onclick="toDetail('${index}')">Detail</button>`
