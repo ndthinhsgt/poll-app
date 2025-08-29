@@ -60,7 +60,7 @@ function checkVoted(index, optionIndex, userId) {
   const result = getVotingResult();
   // kiểm tra xem index, optionIndex, userId, có trong resutl chứa
   let option = [];
-  Object.keys(result?.[index])?.map((key) => {
+  Object.keys(result?.[index] ?? {})?.map((key) => {
     option = [...option, result?.[index]?.[key]];
   });
 
@@ -70,19 +70,19 @@ function checkVoted(index, optionIndex, userId) {
   if (!result[index]) return false;
   if (!result[index][optionIndex]) return false;
 
-  return result[index][optionIndex].includes(userId);
+  return result[index][optionIndex].includes(String(userId));
   };
 // end
 
 function handleChange(index, optionIndex, userId) {
-  const result = getVotingResult();
+  let result = getVotingResult();
   // kiểm tra xem index, optionIndex, userId, có trong resutl chứa
   const check = checkVoted(index, optionIndex, userId); 
   
   // TODO: kiểm tra user id có trong option
-  if (!result) return;
-  if (!result[index]) return;
-  if (!result[index][optionIndex]) return;
+  // if (!result) return;
+  // if (!result[index]) return;
+  // if (!result[index][optionIndex]) return;
 // end
 
   // nếu có rồi thì không làm gì
@@ -94,6 +94,10 @@ function handleChange(index, optionIndex, userId) {
   voteButton.disabled = false;
   voteButton.addEventListener("click", () => {
     voteButton.disabled = true;
+
+  document.querySelectorAll(`input[name="vote-${index}"]`)
+    .forEach(opt => opt.disabled = true);
+
     // Update result
     // result[index][optionIndex]push(userId); //
     /**
@@ -115,9 +119,11 @@ function handleChange(index, optionIndex, userId) {
       voteItemOption = [];
     }
 
-    voteItemOption.push(userId);
+    voteItemOption.push(String(userId));
+    result={...result??{},[index]:{...result?.[index]??{},optionIndex:voteItemOption}}
 
     // Save voting result
+    console.log(result)
     saveVotingResult(result);
     alert("XONG");
   });
@@ -131,10 +137,16 @@ function createVoteElement(vote, index, user) {
 
   const formTop = document.createElement("div");
   formTop.className = "form-top";
+
   const newQuestion = document.createElement("b");
   newQuestion.textContent = vote.question;
   newQuestion.id = `q${index}`;
   formTop.appendChild(newQuestion);
+
+  const userDiv = document.createElement("div");
+  userDiv.className = "user";
+  userDiv.textContent = user?.name ?? "";
+  formTop.appendChild(userDiv);
 
   const formCenter = document.createElement("div");
   formCenter.className = "form-center";
@@ -143,8 +155,9 @@ function createVoteElement(vote, index, user) {
     .map((option, optionIndex) => {
       const optionId = `option-${index}-${optionIndex}`;
       const voted = checkVoted(index, optionIndex, user?.id);
+      console.log(voted,index, optionIndex, user)
       return `
-      <div>
+      <div class="form-center--answer">
       <input 
         type="radio" 
         name="${id}" 

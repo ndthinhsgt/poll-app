@@ -11,8 +11,10 @@ function getVotes() {
   // Nếu có votes thì return vote
   // Nếu votes không có dữ liệu (null) thì khởi tạo (lưu initVotes vào localStorage)
 
-  const votes = JSON.parse(localStorage.getItem("votes"));
-  if(votes) return votes;
+  
+  if(localStorage.getItem("votes")) {
+    return JSON.parse(localStorage.getItem("votes") ?? "{}");
+  }
   //end
 
   const initVotes = [
@@ -74,7 +76,7 @@ function getUserFromSession() {
   };
 
   // TODO
-  const user = JSON.parse(userId); 
-  return { id: Number(user.id), name: user.name};
-}
+  const userName = initUser[userId]; 
+  return { id: userId, name: userName };
+};
 //end
