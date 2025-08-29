@@ -65,13 +65,9 @@ function checkVoted(index, optionIndex, userId) {
   });
 
   // TODO: kiểm tra user id có trong option
-  console.log('checkVoted',index, optionIndex, userId, '1')
   if (!result) return false;
-  console.log('checkVoted',index, optionIndex, userId, '2')
   if (!result[index]) return false;
-  console.log('checkVoted',index, optionIndex, userId, '3')
   if (!result[index][optionIndex]) return false;
-console.log('checkVoted',index, optionIndex, userId, '4')
   return result[index][optionIndex].includes(userId);
   };
 // end
@@ -125,7 +121,6 @@ function handleChange(index, optionIndex, userId) {
     result={...result??{},[index]:{...result?.[index]??{},[optionIndex]:voteItemOption}}
 
     // Save voting result
-    console.log(result)
     saveVotingResult(result);
     alert("XONG");
   });
