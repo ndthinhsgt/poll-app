@@ -122,7 +122,7 @@ function handleChange(index, optionIndex, userId) {
 
     // Save voting result
     saveVotingResult(result);
-    alert("XONG");
+    alert("Đã vote");
   });
 }
 
@@ -157,6 +157,8 @@ function createVoteElement(vote, index, user) {
   const options = vote.options
     .map((option, optionIndex) => {
       const optionId = `option-${index}-${optionIndex}`;
+      const isChecked = checkVoted(index, optionIndex, user?.id);
+
       return `
       <div class="form-center--answer">
       <input 
@@ -164,7 +166,7 @@ function createVoteElement(vote, index, user) {
         name="${id}" 
         id="${optionId}" 
         onchange="handleChange('${index}', '${optionIndex}', '${user.id}')"
-        ${voted ? "disabled" : ""}
+        ${isChecked ? "checked disabled" : ""}
         />
       <label for="${optionId}">${option.text}</label>
       </div>
