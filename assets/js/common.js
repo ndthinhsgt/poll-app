@@ -81,6 +81,7 @@ function getUserFromSession() {
 };
 //end
 
+
 function logOut() {
   const logSession = JSON.parse(sessionStorage.getItem("loginUser"));
   if (!logSession) {
@@ -90,4 +91,12 @@ function logOut() {
     sessionStorage.removeItem("loginUser");
     window.location.href = "/login";
   }
+
+function goBack(){
+    if (window.history.length > 1){
+        window.history.back();
+    } else {
+        alert("Không có trang trước!");
+    }
 }
+  
