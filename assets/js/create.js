@@ -64,5 +64,3 @@ function handleChange(optionIndex, event){
   renderOptions();
   console.log("Newoption", options);
 }
-
-

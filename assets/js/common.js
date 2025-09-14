@@ -80,3 +80,23 @@ function getUserFromSession() {
   return { id: userId, name: userName };
 };
 //end
+
+
+function logOut() {
+  const logSession = JSON.parse(sessionStorage.getItem("loginUser"));
+  if (!logSession) {
+    window.location.href = "/login";
+  } else {
+    alert("Bạn có muốn đăng xuất?");
+    sessionStorage.removeItem("loginUser");
+    window.location.href = "/login";
+  }
+
+function goBack(){
+    if (window.history.length > 1){
+        window.history.back();
+    } else {
+        alert("Không có trang trước!");
+    }
+}
+  
