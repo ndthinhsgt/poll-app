@@ -39,7 +39,7 @@ function deleteOption(i){
   if (delConfirm){
     options = options.filter((_, index) => index !== i)
 // 4.3 gọi hàm renderOption();
-    renderOptions()
+    renderOptions();
   }
 }
 
@@ -61,4 +61,8 @@ function handleChange(optionIndex, event){
 // 6.1 change data của options => options[optionIndex] = event.value
   const newOp = event.target.value;
   options[optionIndex] = newOp;
+  renderOptions();
+  console.log("Newoption", options);
 }
+
+
