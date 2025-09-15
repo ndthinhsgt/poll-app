@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="./assets/css/common.css">
     <link rel="stylesheet" href="./assets/css/detail.css">
 </head>
+
 <body>
     <div class="body-top">
         <h1>Thông tin Vote</h1>
@@ -17,25 +19,47 @@
     </div>
 
     <div class="vote-content">
-        <div>
-            <label>Tiêu đề</label>
-            <br>
-            <input id="vote-title" type="text" value="" readonly>
-        </div>
- 
-        <div class="vote-option">
-            <div>
-                <label>Option 1</label>
-                <br>
-                <input id="option1" type="text" value="" readonly>
-            </div>
-            <div>
-                <p>0 Votes</p>
-            </div>
-        </div>
+        <fieldset disabled>
+            <label for="title">Tiêu đề</label>
+            <input type="text" name="title">
+            <label for="option">Option</label>
+
+            <div id="more-option"></div>
+        </fieldset>
     </div>
 
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/detail.js"></script>
+    <script>
+        const votes = getVotes();
+        const voteResult = getVotingResult();
+        const query = new URLSearchParams(window.location.search);
+        const id = query.get("id")
+        if (!id) {
+            alert("Not found");
+            window.location.href = "/list"
+        }
+
+        const find = votes.find((v, index) => index == id)
+
+        function $(id) {
+            return document.querySelector(id);
+        }
+
+        $("input[name='title']").value = find.question
+
+        $("#more-option").innerHTML = "";
+        let innerHtml = ''
+        find.options?.map((option, index) => {
+            innerHtml += `
+            <div style="display:flex">
+            <input value="${option.text}"/> 
+        ${voteResult?.[parseInt(id)]?.[index] ?? 0} votes
+            </div>`;
+        })
+
+        $("#more-option").innerHTML = innerHtml
+    </script>
 </body>
+
 </html>
