@@ -22,6 +22,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // render list vote
   renderListVote(app, user);
+
+  const createBtn = document.querySelector("#createvote");
+  if (user.id !== "1") {
+    createBtn.style.display = "none";
+  }
 });
 
 function toDetail(id) {
@@ -142,7 +147,7 @@ function createVoteElement(vote, index, user) {
 
   const userDiv = document.createElement("div");
   userDiv.className = "user";
-  userDiv.textContent = user?.name ?? "";
+  userDiv.textContent = "Huy (Admin)";
   formTop.appendChild(userDiv);
 
   const formCenter = document.createElement("div");
