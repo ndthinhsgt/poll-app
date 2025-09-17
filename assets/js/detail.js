@@ -34,7 +34,7 @@ function renderVoteDetail(id) {
           <input type="text" value="${opt.text}">
         </div>
         <div>
-          <p style="margin-right:10px;">${count} Votes</p>
+          <div class="vote-count">${count} Votes</div>
         </div>
       </div>
     `;
