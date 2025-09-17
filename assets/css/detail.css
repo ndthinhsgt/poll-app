@@ -5,7 +5,7 @@
 }
 
 .vote-content {
-    width: 400px;
+    width: 500px;
 }
 
 .vote-content input {
@@ -28,6 +28,7 @@
 }
 
 .vote-option > .vote-count {
-  width: 50px; 
-  text-align: center;
+  width: 100px; 
+  margin-left: 25px;
+  padding-top: 10px;
 }
