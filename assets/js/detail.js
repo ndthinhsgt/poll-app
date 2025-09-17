@@ -1,3 +1,6 @@
+window.addEventListener("DOMContentLoaded", () => {
+    document.querySelector('#back').addEventListener("click", goBack);
+  
 const query = new URLSearchParams(window.location.search);
 const id = query.get("id")
  
@@ -44,3 +47,4 @@ function renderVoteDetail(id) {
 }
 
 renderVoteDetail(id);
+});
