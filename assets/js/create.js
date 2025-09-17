@@ -1,4 +1,8 @@
 window.addEventListener("DOMContentLoaded", () => {
+  document.querySelector("#logout").addEventListener("click", logOut);
+
+  document.querySelector("#back").addEventListener("click", goBack);
+  
   document.querySelector("#addOption").addEventListener("click", addOption);
 
   document.querySelector("form").addEventListener("submit", handleSubmit);
