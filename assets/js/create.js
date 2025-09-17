@@ -8,25 +8,25 @@ window.addEventListener("DOMContentLoaded", () => {
 let options = [];
 
 // 2 function renderOptions()
-function renderOptions() {
-  // 2.1 lấy more-option element
-  const moreOption = document.getElementById("more-option");
-  // 2.2 set more-option innerHTML = ''
-  moreOption.innerHTML = "";
-  // 2.3 Loop mảng options vẽ ra input loop (optionData, optionIndex)
-  options.forEach((optionData, optionIndex) => {
-    // 2.4 <div>Option 2</div><input name="option[]" value="${optionData}" onchange="handleChange(${optionIndex}, event)"/> <button onclick="deleteOption(optionIndex)">Xoá</button>
-    moreOption.innerHTML += `
+function renderOptions(){
+// 2.1 lấy more-option element
+  const moreOption = document.getElementById('more-option');
+// 2.2 set more-option innerHTML = ''
+  moreOption.innerHTML = '';
+// 2.3 Loop mảng options vẽ ra input loop (optionData, optionIndex)
+options.forEach((optionData, optionIndex) => {
+// 2.4 <div>Option 2</div><input name="option[]" value="${optionData}" onchange="handleChange(${optionIndex}, event)"/> <button onclick="deleteOption(optionIndex)">Xoá</button>
+  moreOption.innerHTML += `
     <div>Option ${optionIndex + 1}</div>
     <input id="option-${optionIndex}" name="option[]" value="${optionData}" onchange="handleChange(${optionIndex}, event)"/>
     <button type="button" id= "btn-${optionIndex}" onclick="deleteOption(${optionIndex})">Xoá</button>`;
-  });
-}
+  })
+};
 
 // 3 function addOption() => thêm vào onclick của add button
-function addOption() {
-  // 3.1 thêm 1 data chuỗi rỗng vào options => options.push('')
-  options.push("");
+function addOption(){
+// 3.1 thêm 1 data chuỗi rỗng vào options => options.push('')
+  options.push('');
   renderOptions();
   console.log("data", options);
 }
