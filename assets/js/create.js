@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-  document.querySelector('#addOption').addEventListener("click", addOption);
+  document.querySelector("#addOption").addEventListener("click", addOption);
 
   document.querySelector("form").addEventListener("submit", handleSubmit);
 });
@@ -32,33 +32,60 @@ function addOption(){
 }
 
 // 4 function deleteOption(optionIndex)
-function deleteOption(i){
-// 4.1 hiển thị 1 confirm('Bạn có muốn xoá option này không ?')
-  const delConfirm = confirm("Bạn có muốn xoá option này không?")
-// 4.2 Xoá optionIndex khỏi mảng options (dùng filter hay ... gì cũng được) => kết quả sau khi xoá thì option đó biến mất
-  if (delConfirm){
-    options = options.filter((_, index) => index !== i)
-// 4.3 gọi hàm renderOption();
+function deleteOption(i) {
+  // 4.1 hiển thị 1 confirm('Bạn có muốn xoá option này không ?')
+  const delConfirm = confirm("Bạn có muốn xoá option này không?");
+  // 4.2 Xoá optionIndex khỏi mảng options (dùng filter hay ... gì cũng được) => kết quả sau khi xoá thì option đó biến mất
+  if (delConfirm) {
+    options = options.filter((_, index) => index !== i);
+    // 4.3 gọi hàm renderOption();
     renderOptions();
   }
 }
 
-// 5 function handleSubmit(event) => thêm vào <form onsubmit="handleSubmit"...
-function handleSubmit(event){
-// 5.1 chặn sự kiện reload page của form event.preventDefault()
+// sửa handleSubmit
+function handleSubmit(event) {
+  // 5.1 chặn sự kiện reload page của form event.preventDefault()
   event.preventDefault();
-// 5.2 lấy formdata const formData = new FormData(event.currentTarget)
+  // 5.2 lấy formdata const formData = new FormData(event.currentTarget)
   const formData = new FormData(event.currentTarget);
-// 5.3 lấy object entries const data = Object.fromEntries(formData.entries());
+  // 5.3 lấy object entries const data = Object.fromEntries(formData.entries());
   const data = Object.fromEntries(formData.entries());
-// 5.4 để todo và log // TODO: handle create, console.log("create data", data)
-  localStorage.setItem("formData", JSON.stringify(data));
-  console.log("create data", data);
-}
 
-// 6 function handleChange(optionIndex, event)
-function handleChange(optionIndex, event){
-// 6.1 change data của options => options[optionIndex] = event.value
+  // sửa từ đây
+  const question = formData.get("title");
+  const options = formData
+    .getAll("option[]")
+    .filter((option) => option != "")
+    .map((text, index) => ({ index, text }));
+
+  // option [string, string]
+  // cần format thành [{index, text}]
+
+  if (options.length == 0) {
+    alert("Cần nhập ít nhất một option!");
+    return;
+  }
+
+  // Lấy ra > push vào list > lưu lại
+  const votes = getVotes();
+  votes.push({ question, options });
+  saveVotes(votes);
+
+  confirm("Tạo vote thành công!");
+
+  if (confirm("Đã tạo vote, bạn có muốn xem trang List?")) {
+    // Nếu người dùng chọn OK → về trang danh sách
+    window.location.href = "/list";
+  } else {
+    // Nếu chọn Cancel → reload lại trang hiện tại
+    window.location.reload();
+  }
+}
+//end
+
+function handleChange(optionIndex, event) {
+  // 6.1 change data của options => options[optionIndex] = event.value
   const newOp = event.target.value;
   options[optionIndex] = newOp;
   renderOptions();
