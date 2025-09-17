@@ -90,7 +90,7 @@ function logOut() {
     alert("Bạn có muốn đăng xuất?");
     sessionStorage.removeItem("loginUser");
     window.location.href = "/login";
-  }
+  }}
 
 function goBack(){
     if (window.history.length > 1){
@@ -98,4 +98,5 @@ function goBack(){
     } else {
         alert("Không có trang trước!");
     }
-}}
+}
+  
