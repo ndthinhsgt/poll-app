@@ -5,7 +5,7 @@
 }
 
 .vote-content {
-    width: 400px;
+    width: 500px;
 }
 
 .vote-content input {
@@ -25,4 +25,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.vote-option > .vote-count {
+  width: 100px; 
+  margin-left: 25px;
+  padding-top: 10px;
 }
