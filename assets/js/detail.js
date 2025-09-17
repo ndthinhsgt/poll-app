@@ -34,13 +34,14 @@ function renderVoteDetail(id) {
           <input type="text" value="${opt.text}">
         </div>
         <div>
-          <p>${count} Votes</p>
+          <p style="margin-right:10px;">${count} Votes</p>
         </div>
       </div>
     `;
   });
 
   html += `</fieldset>`;
+  console.log("Generated HTML:", html);
   voteContent.innerHTML = html;
 }
 
