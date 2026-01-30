@@ -10,10 +10,27 @@ function renderOptions() {
   const moreOption = document.getElementById("more-option");
   moreOption.innerHTML = "";
   options.forEach((optionData, optionIndex) => {
-    moreOption.innerHTML += `
-    <div>Option ${optionIndex + 1}</div>
-    <input id="option-${optionIndex}" name="option[]" value="${optionData}" onchange="handleChange(${optionIndex}, event)"/>
-    <button type="button" id= "btn-${optionIndex}" onclick="deleteOption(${optionIndex})">Xoá</button>`;
+    const div = document.createElement("div");
+    
+    const label = document.createElement("div");
+    label.textContent = `Option ${optionIndex + 1}`;
+    div.appendChild(label);
+    
+    const input = document.createElement("input");
+    input.id = `option-${optionIndex}`;
+    input.name = "option[]";
+    input.value = optionData;
+    input.onchange = (event) => handleChange(optionIndex, event);
+    div.appendChild(input);
+    
+    const button = document.createElement("button");
+    button.type = "button";
+    button.id = `btn-${optionIndex}`;
+    button.textContent = "Xoá";
+    button.onclick = () => deleteOption(optionIndex);
+    div.appendChild(button);
+    
+    moreOption.appendChild(div);
   });
 }
 

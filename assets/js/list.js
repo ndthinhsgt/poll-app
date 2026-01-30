@@ -76,8 +76,13 @@ function handleChange(index, optionIndex, userId) {
 
   const voteButton = document.getElementById(`vote-${index}-button`);
   voteButton.disabled = false;
-  voteButton.addEventListener("click", () => {
-    voteButton.disabled = true;
+  
+  // Remove existing event listener by cloning the button
+  const newVoteButton = voteButton.cloneNode(true);
+  voteButton.parentNode.replaceChild(newVoteButton, voteButton);
+  
+  newVoteButton.addEventListener("click", () => {
+    newVoteButton.disabled = true;
 
   document.querySelectorAll(`input[name="vote-${index}"]`)
     .forEach(opt => opt.disabled = true);
@@ -139,27 +144,31 @@ function createVoteElement(vote, index, user) {
       return checkVoted(index, optionIndex, user?.id);
     })
  
-  const options = vote.options
-    .map((option, optionIndex) => {
-      const optionId = `option-${index}-${optionIndex}`;
-      const isChecked = checkVoted(index, optionIndex, user?.id);
+  vote.options.forEach((option, optionIndex) => {
+    const optionId = `option-${index}-${optionIndex}`;
+    const isChecked = checkVoted(index, optionIndex, user?.id);
 
-      return `
-      <div class="form-center--answer">
-      <input 
-        type="radio" 
-        name="${id}" 
-        id="${optionId}" 
-        onchange="handleChange('${index}', '${optionIndex}', '${user.id}')"
-        ${isChecked ? "checked disabled" : ""}
-        />
-      <label for="${optionId}">${option.text}</label>
-      </div>
-    `;
-    })
-    .join(" ");
+    const answerDiv = document.createElement("div");
+    answerDiv.className = "form-center--answer";
 
-  formCenter.innerHTML = options;
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = id;
+    input.id = optionId;
+    input.onchange = () => handleChange(index, optionIndex, user.id);
+    if (isChecked) {
+      input.checked = true;
+      input.disabled = true;
+    }
+
+    const label = document.createElement("label");
+    label.htmlFor = optionId;
+    label.textContent = option.text;
+
+    answerDiv.appendChild(input);
+    answerDiv.appendChild(label);
+    formCenter.appendChild(answerDiv);
+  });
 
   const formBottom = document.createElement("div");
   formBottom.className = "form-bottom";

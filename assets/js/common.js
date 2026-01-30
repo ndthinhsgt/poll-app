@@ -66,7 +66,7 @@ function getUserFromSession() {
   };
 
   const userName = initUser[userId]; 
-  return { id: userId, name: userName };
+  return { id: parseInt(userId), name: userName };
 }
 
 
