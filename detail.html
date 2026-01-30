@@ -40,7 +40,7 @@
             window.location.href = "/list"
         }
 
-        const find = votes.find((v, index) => index == id)
+        const find = votes.find((v, index) => index === parseInt(id))
         
         if (!find) {
             alert("Poll not found");

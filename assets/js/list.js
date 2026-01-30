@@ -172,14 +172,19 @@ function createVoteElement(vote, index, user) {
 
   const formBottom = document.createElement("div");
   formBottom.className = "form-bottom";
-  formBottom.innerHTML = `
-    <button id="${id}-button" disabled>Vote${voted ?'d':''}</button>
-    ${
-      user?.id == 1
-        ? `<button onclick="toDetail('${index}')">Detail</button>`
-        : ""
-    }
-  `;
+  
+  const voteButton = document.createElement("button");
+  voteButton.id = `${id}-button`;
+  voteButton.disabled = true;
+  voteButton.textContent = `Vote${voted ? 'd' : ''}`;
+  formBottom.appendChild(voteButton);
+  
+  if (user?.id === 1) {
+    const detailButton = document.createElement("button");
+    detailButton.textContent = "Detail";
+    detailButton.onclick = () => toDetail(index);
+    formBottom.appendChild(detailButton);
+  }
 
   element.appendChild(formTop);
   element.appendChild(formCenter);
