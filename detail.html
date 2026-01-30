@@ -40,7 +40,12 @@
             window.location.href = "/list"
         }
 
-        const find = votes.find((v, index) => index == id)
+        const find = votes.find((v, index) => index === parseInt(id))
+        
+        if (!find) {
+            alert("Poll not found");
+            window.location.href = "/list";
+        }
 
         function $(id) {
             return document.querySelector(id);
@@ -48,17 +53,23 @@
 
         $("input[name='title']").value = find.question
 
-        $("#more-option").innerHTML = "";
-        let innerHtml = ''
-        find.options?.map((option, index) => {
-            innerHtml += `
-            <div style="display:flex">
-            <input value="${option.text}"/> 
-        ${voteResult?.[parseInt(id)]?.[index] ?? 0} votes
-            </div>`;
-        })
-
-        $("#more-option").innerHTML = innerHtml
+        const moreOptionDiv = $("#more-option");
+        moreOptionDiv.innerHTML = "";
+        
+        find.options?.forEach((option, index) => {
+            const container = document.createElement("div");
+            container.style.display = "flex";
+            
+            const input = document.createElement("input");
+            input.value = option.text;
+            container.appendChild(input);
+            
+            const voteCount = voteResult?.[parseInt(id)]?.[index]?.length ?? 0;
+            const voteText = document.createTextNode(` ${voteCount} votes`);
+            container.appendChild(voteText);
+            
+            moreOptionDiv.appendChild(container);
+        });
     </script>
 </body>
 
