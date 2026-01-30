@@ -6,16 +6,9 @@ function redirect(url) {
 
 function getVotes() {
   // Lấy votes từ localStorage key là 'votes'
-  // TODO
-  // const votes = JSON.parse(localStorage.getItem("votes"));
-  // Nếu có votes thì return vote
-  // Nếu votes không có dữ liệu (null) thì khởi tạo (lưu initVotes vào localStorage)
-
-  
   if(localStorage.getItem("votes")) {
-    return JSON.parse(localStorage.getItem("votes") ?? "{}");
+    return JSON.parse(localStorage.getItem("votes"));
   }
-  //end
 
   const initVotes = [
     {
@@ -39,11 +32,9 @@ function getVotes() {
   return initVotes;
 }
 
-// change
 function saveVotes(votes) {
   localStorage.setItem("votes", JSON.stringify(votes));
 }
-//end
 
 function getVotingResult() {
   try {
@@ -57,7 +48,6 @@ function getVotingResult() {
 function saveVotingResult(votes) {
   localStorage.setItem("voteResult", JSON.stringify(votes));
 }
-//end
 
 function getUserFromSession() {
   // Lấy user từ session
@@ -75,11 +65,9 @@ function getUserFromSession() {
     3: "Quynh",
   };
 
-  // TODO
   const userName = initUser[userId]; 
   return { id: userId, name: userName };
-};
-//end
+}
 
 
 function logOut() {
@@ -91,6 +79,7 @@ function logOut() {
     sessionStorage.removeItem("loginUser");
     window.location.href = "/login";
   }
+}
 
 function goBack(){
     if (window.history.length > 1){
@@ -98,4 +87,4 @@ function goBack(){
     } else {
         alert("Không có trang trước!");
     }
-}}
+}

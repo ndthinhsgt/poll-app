@@ -58,35 +58,21 @@ function renderListVote(app, user) {
 
 function checkVoted(index, optionIndex, userId) {
   const result = getVotingResult();
-  // kiểm tra xem index, optionIndex, userId, có trong resutl chứa
-  let option = [];
-  Object.keys(result?.[index] ?? {})?.map((key) => {
-    option = [...option, result?.[index]?.[key]];
-  });
-
-  // TODO: kiểm tra user id có trong option
+  
   if (!result) return false;
   if (!result[index]) return false;
   if (!result[index][optionIndex]) return false;
   return result[index][optionIndex].includes(userId);
-  };
-// end
+}
 
 function handleChange(index, optionIndex, userId) {
   let result = getVotingResult();
-  // kiểm tra xem index, optionIndex, userId, có trong resutl chứa
   const check = checkVoted(index, optionIndex, userId); 
   
-  // TODO: kiểm tra user id có trong option
-  // if (!result) return;
-  // if (!result[index]) return;
-  // if (!result[index][optionIndex]) return;
-// end
-
   // nếu có rồi thì không làm gì
   if (check) {
     return;
-  };
+  }
 
   const voteButton = document.getElementById(`vote-${index}-button`);
   voteButton.disabled = false;
@@ -129,7 +115,6 @@ function handleChange(index, optionIndex, userId) {
 function createVoteElement(vote, index, user) {
   const id = `vote-${index}`;
 
-  // change
   const element = document.createElement("fieldset");
 
   const formTop = document.createElement("div");
@@ -192,5 +177,4 @@ function createVoteElement(vote, index, user) {
   element.appendChild(formBottom);
 
   return element;
-};
-//end
+}
