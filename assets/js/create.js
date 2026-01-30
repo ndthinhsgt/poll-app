@@ -34,15 +34,14 @@ function deleteOption(i) {
 function handleSubmit(event) {
   event.preventDefault();
   const formData = new FormData(event.currentTarget);
-  const data = Object.fromEntries(formData.entries());
 
   const question = formData.get("title");
   const options = formData
     .getAll("option[]")
-    .filter((option) => option != "")
+    .filter((option) => option !== "")
     .map((text, index) => ({ index, text }));
 
-  if (options.length == 0) {
+  if (options.length === 0) {
     alert("Cần nhập ít nhất một option!");
     return;
   }

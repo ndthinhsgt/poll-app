@@ -44,7 +44,6 @@ function getVotingResult() {
   }
 }
 
-//change
 function saveVotingResult(votes) {
   localStorage.setItem("voteResult", JSON.stringify(votes));
 }
